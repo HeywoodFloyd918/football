@@ -6,13 +6,14 @@ function FootbalState({children}) {
     const [state, dispach] = useReducer(reducer,{
         matches: []
     })
-    function fetchMatch() {
-        fetch("https://api.football-data.org/v2/matches", {
+    async function fetchMatch() {
+        let promise = await fetch("https://api.football-data.org/v2/matches", {
             method: 'GET',
             headers: {
                 "X-Auth-Token": "e70405b2f2a54b9cb55f35aed8cc669b"
             },
-        }).then((request) => {
+        })
+        promise.then((request) => {
             if (request.ok) {
                 return request.json();
             }
